@@ -1,290 +1,350 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <title>السحب الكبير - اربح جوائز مذهلة!</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
-      max-width: 700px;
-      margin: auto;
-      text-align: center;
-    }
-    form {
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      margin-bottom: 20px;
-    }
-    input, button {
-      width: 100%;
-      margin: 10px 0;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-    button {
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .error {
-      color: red;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    .success {
-      color: green;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    .notice {
-      background: #fff9d6;
-      border: 1px solid #ffe58f;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: right;
-      margin-bottom: 20px;
-    }
-    ul {
-      text-align: right;
-      margin-top: 0;
-      padding-left: 20px;
-    }
-    /* جدول عرض المشتركين */
-    #entriesSection {
-      display: none;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      margin-top: 20px;
-      text-align: center;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: center;
-      font-size: 14px;
-    }
-    th {
-      background-color: #007BFF;
-      color: white;
-    }
-    img {
-      max-width: 80px;
-      border-radius: 5px;
-    }
-    .no-entries {
-      color: #666;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-    #toggleEntriesBtn {
-      background-color: #28a745;
-      margin-top: 10px;
-      padding: 10px 15px;
-      border: none;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    #toggleEntriesBtn:hover {
-      background-color: #1e7e34;
-    }
-    #clearBtn {
-      background-color: #dc3545;
-      margin-top: 10px;
-      padding: 10px 15px;
-      border: none;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    #clearBtn:hover {
-      background-color: #a71d2a;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مين الجاسوس؟</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;padding:16px;
+ display:flex;justify-content:center;align-items:center;
+ background:linear-gradient(145deg,#10142c,#34205b,#721d60);
+ color:#fff;font-family:Tahoma,Arial,sans-serif
+}
+.card{
+ width:100%;max-width:490px;padding:23px;
+ background:#ffffff12;border:1px solid #ffffff30;
+ border-radius:24px;box-shadow:0 15px 50px #0005;text-align:center
+}
+h1{color:#ffd76a}
+p{line-height:1.8;color:#e0dcf6}
+input,textarea,select{
+ width:100%;padding:13px;margin:7px 0 14px;
+ background:#171832;color:white;border:1px solid #7773b9;
+ border-radius:11px;font:inherit
+}
+textarea{height:120px}
+button{
+ width:100%;padding:14px;margin-top:9px;border:0;
+ border-radius:12px;background:#ffd76a;color:#211638;
+ font:bold 16px Tahoma;cursor:pointer
+}
+button.alt{background:#6255a8;color:white}
+button.red{background:#bd425c;color:white}
+button:disabled{opacity:.5}
+.panel{
+ background:#171832;border:1px solid #ffffff20;
+ border-radius:16px;padding:18px;margin:16px 0
+}
+.big{font-size:25px;font-weight:bold;color:#ffd76a;overflow-wrap:anywhere}
+.small{font-size:13px;color:#c7c3e7}
+.hide{display:none!important}
+.timer{font-size:32px;font-weight:bold;color:#ffd76a;margin:10px}
+.progress{height:7px;background:#44416b;border-radius:8px;overflow:hidden}
+#bar{height:100%;width:100%;background:#ffd76a;transition:width 1s linear}
+.item{text-align:right;padding:12px;border-bottom:1px solid #ffffff20;line-height:1.8}
+.badge{color:#ffd76a;font-weight:bold}
+</style>
 </head>
 <body>
+<div class="card">
+<h1>🕵️ مين الجاسوس؟</h1>
+<p>اسأل، شكّ، صوّت، واكشف الجاسوس! 🔥</p>
 
-  <h1>🎁 شارك في السحب الكبير!</h1>
-  <p>حوّل <strong>100 جنيه فقط</strong> إلى رقم كاش المسابقة <strong style="color:darkred">01141310586</strong> وادخل السحب على الجوائز التالية:</p>
+<section id="setup">
+<label>أسماء اللاعبين، كل اسم في سطر</label>
+<textarea id="names" placeholder="أحمد&#10;محمد&#10;عمر&#10;يوسف"></textarea>
 
-  <div class="notice">
-    <h3>📅 موعد السحب القادم:</h3>
-    <p><strong>1 من كل شهر</strong>، وسيتم اختيار الفائزين بشكل عشوائي</p>
-    <h4>🎉 الجوائز:</h4>
-    <ul>
-      <li>📱 iPhone 16 Pro Max</li>
-      <li>🚗 سيارة كايي X7</li>
-      <li>🎓 تابلت مدرسة حديث</li>
-      <li>👰 جهاز عروسة كامل من العربي</li>
-    </ul>
-  </div>
+<label>فئة الكلمة</label>
+<select id="category">
+<option value="all">🎲 كل الفئات</option>
+<option value="food">🍕 أكلات</option>
+<option value="places">🌍 أماكن</option>
+<option value="animals">🐼 حيوانات</option>
+<option value="objects">🎮 أشياء</option>
+</select>
 
-  <form id="lotteryForm">
-    <p><strong style="font-size: 18px;">رقم كاش المسابقة: 01141310586</strong></p>
-    <input type="text" id="name" placeholder="الاسم الثلاثي" required />
-    <input type="text" id="yourCashNumber" placeholder="رقمك الكاش (اللي حولت منه)" required />
-    <input type="text" id="whatsapp" placeholder="رقم واتسابك للتواصل" required />
-    <input type="file" id="screenshot" accept="image/*" required />
-    <button type="submit">اشترك الآن</button>
-    <p id="feedback" class=""></p>
-    <p style="color: darkred; font-size: 14px;">❗ لن يتم تأكيد اشتراكك إلا بعد التأكد من التحويل.</p>
-  </form>
+<label>عدد الجواسيس</label>
+<select id="spyCount">
+<option value="1">جاسوس واحد</option>
+<option value="2">جاسوسان</option>
+</select>
 
-  <button id="toggleEntriesBtn">عرض المشتركين في السحب</button>
+<label>وقت كل مرحلة بالثواني</label>
+<select id="seconds">
+<option value="15">15 ثانية</option>
+<option value="30" selected>30 ثانية</option>
+<option value="45">45 ثانية</option>
+<option value="60">دقيقة</option>
+<option value="90">دقيقة ونصف</option>
+</select>
 
-  <section id="entriesSection">
-    <h2>قائمة المشتركين</h2>
-    <div id="entriesContainer"></div>
-    <button id="clearBtn">مسح جميع المشتركين</button>
-  </section>
+<button onclick="startGame()">🚀 ابدأ اللعبة</button>
+</section>
 
-  <script>
-    const form = document.getElementById('lotteryForm');
-    const feedback = document.getElementById('feedback');
-    const toggleBtn = document.getElementById('toggleEntriesBtn');
-    const entriesSection = document.getElementById('entriesSection');
-    const entriesContainer = document.getElementById('entriesContainer');
-    const clearBtn = document.getElementById('clearBtn');
+<section id="pass" class="hide">
+<div class="panel">
+<p id="passTitle">سلّم الموبايل إلى</p>
+<div id="passName" class="big"></div>
+<p id="passHint">خلي باقي اللاعبين يبعدوا عن الشاشة.</p>
+</div>
+<button onclick="openRole()">👁️ اكشف دوري</button>
+</section>
 
-    // نموذج الاشتراك
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      feedback.textContent = '';
-      feedback.className = '';
+<section id="role" class="hide">
+<div class="panel">
+<div id="roleTitle"></div>
+<div id="roleWord" class="big"></div>
+<p id="roleHint"></p>
+</div>
+<button onclick="roleDone()">🔒 أخفِ الدور</button>
+</section>
 
-      const name = document.getElementById('name').value.trim();
-      const yourCashNumber = document.getElementById('yourCashNumber').value.trim();
-      const whatsapp = document.getElementById('whatsapp').value.trim();
-      const screenshot = document.getElementById('screenshot').files[0];
+<section id="questions" class="hide">
+<div class="panel">
+<p>🎤 دور الأسئلة</p>
+<div class="small">اللاعب الذي يسأل</div>
+<div id="asker" class="big"></div>
+<p>اسأل اللاعب التالي:</p>
+<div id="target" class="big"></div>
+<p>اسأله سؤالًا يساعدك تعرف إذا كان يعرف الكلمة.</p>
+<div class="timer" id="timer1"></div>
+<div class="progress"><div id="bar1"></div></div>
+</div>
+<button onclick="nextQuestion()">✅ السؤال التالي</button>
+<button class="alt" onclick="skipToSuspicion()">⏭️ إنهاء الأسئلة</button>
+</section>
 
-      if (name.length < 7) {
-        feedback.textContent = '❌ الاسم الثلاثي يجب أن يكون واضحًا وكاملًا.';
-        feedback.className = 'error';
-        return;
-      }
-      if (!yourCashNumber.match(/^01[0-9]{9}$/)) {
-        feedback.textContent = '❌ رقمك الكاش غير صحيح. يجب أن يكون 11 رقم ويبدأ بـ 01.';
-        feedback.className = 'error';
-        return;
-      }
-      if (!whatsapp.match(/^01[0-9]{9}$/)) {
-        feedback.textContent = '❌ رقم واتساب غير صحيح.';
-        feedback.className = 'error';
-        return;
-      }
-      if (!screenshot || !screenshot.type.startsWith('image/')) {
-        feedback.textContent = '❌ يجب رفع صورة واضحة لعملية التحويل.';
-        feedback.className = 'error';
-        return;
-      }
+<section id="suspicion" class="hide">
+<div class="panel">
+<p>🧐 مرحلة الشك</p>
+<p>دلوقتي دور اللاعب:</p>
+<div id="susPlayer" class="big"></div>
+<p>إنت شاكك في مين؟ اختار اسمًا، وبعدها سلّم الموبايل للي بعدك.</p>
+<select id="susChoice"></select>
+<div class="timer" id="timer2"></div>
+<div class="progress"><div id="bar2"></div></div>
+</div>
+<button onclick="saveSuspicion()">تأكيد الشك 🔍</button>
+<button class="alt" onclick="skipToVoting()">⏭️ ابدأ التصويت</button>
+</section>
 
-      const reader = new FileReader();
-      reader.onload = function() {
-        const data = {
-          name,
-          yourCashNumber,
-          whatsapp,
-          screenshot: reader.result,
-          time: new Date().toLocaleString()
-        };
-        const current = JSON.parse(localStorage.getItem('entries') || '[]');
-        current.push(data);
-        localStorage.setItem('entries', JSON.stringify(current));
+<section id="vote" class="hide">
+<div class="panel">
+<p>🗳️ التصويت السري</p>
+<div class="small">المصوّت الحالي</div>
+<div id="voter" class="big"></div>
+<p>اختار الشخص اللي تعتقد إنه الجاسوس.</p>
+<select id="voteChoice"></select>
+<div class="timer" id="timer3"></div>
+<div class="progress"><div id="bar3"></div></div>
+<p class="small">اختيارك لن يظهر للاعبين الآخرين قبل انتهاء التصويت.</p>
+</div>
+<button onclick="submitVote()">🔒 تأكيد التصويت</button>
+</section>
 
-        feedback.textContent = '✅ تم الاشتراك بنجاح! سيتم التواصل معك بعد التأكد من التحويل.';
-        feedback.className = 'success';
-        form.reset();
-        // لو القائمة مفتوحة حدثها تلقائي
-        if (entriesSection.style.display === 'block') {
-          renderEntries();
-        }
-      };
-      reader.readAsDataURL(screenshot);
-    });
+<section id="results" class="hide">
+<div class="panel">
+<div class="big">📊 نتيجة التصويت</div>
+<p id="resultText"></p>
+<div id="resultsList"></div>
+</div>
+<button onclick="showSpies()">🕵️ اكشف هوية الجاسوس</button>
+<div id="spyReveal" class="panel hide"></div>
+<button onclick="newRound()">🔄 جولة جديدة</button>
+<button class="alt" onclick="location.reload()">🏠 القائمة الرئيسية</button>
+</section>
+</div>
 
-    // عرض/إخفاء قسم المشتركين
-    toggleBtn.addEventListener('click', () => {
-      if (entriesSection.style.display === 'block') {
-        entriesSection.style.display = 'none';
-        toggleBtn.textContent = 'عرض المشتركين في السحب';
-      } else {
-        renderEntries();
-        entriesSection.style.display = 'block';
-        toggleBtn.textContent = 'إخفاء المشتركين';
-      }
-    });
+<script>
+const words={
+ food:["بيتزا","كشري","برجر","ملوخية","شاورما","فشار","آيس كريم","محشي","كريب","بطاطس"],
+ places:["المدرسة","المطار","البحر","المستشفى","السينما","المكتبة","المطعم","الحديقة","الفندق","الملعب"],
+ animals:["أسد","فيل","قطة","كلب","زرافة","دولفين","نسر","تمساح","أرنب","حصان"],
+ objects:["موبايل","كمبيوتر","كرة","ساعة","تلفزيون","سماعة","كرسي","مروحة","كاميرا","مفتاح"]
+};
 
-    // عرض المشتركين في جدول
-    function renderEntries() {
-      const entries = JSON.parse(localStorage.getItem('entries') || '[]');
-      if (entries.length === 0) {
-        entriesContainer.innerHTML = '<p class="no-entries">لا يوجد مشتركين حتى الآن.</p>';
-        return;
-      }
+let players=[],spies=[],word="",seconds=30,timer=null;
+let questionOrder=[],susOrder=[],voteOrder=[];
+let qi=0,si=0,vi=0;
+let suspicions={},votes={};
 
-      let table = `<table>
-        <thead>
-          <tr>
-            <th>الاسم الثلاثي</th>
-            <th>رقم الكاش</th>
-            <th>واتساب</th>
-            <th>وقت التسجيل</th>
-            <th>صورة التحويل</th>
-          </tr>
-        </thead>
-        <tbody>`;
+function show(id){
+ ["setup","pass","role","questions","suspicion","vote","results"]
+ .forEach(x=>document.getElementById(x).classList.add("hide"));
+ document.getElementById(id).classList.remove("hide");
+ stopTimer();
+}
+function stopTimer(){
+ if(timer!==null){clearInterval(timer);timer=null}
+}
+function shuffle(a){
+ a=[...a];
+ for(let i=a.length-1;i>0;i--){
+  let j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+function startGame(){
+ players=[...new Set(document.getElementById("names").value
+ .split(/[\n,،]+/).map(x=>x.trim()).filter(Boolean))];
 
-      entries.forEach(entry => {
-        table += `
-          <tr>
-            <td>${escapeHTML(entry.name)}</td>
-            <td>${escapeHTML(entry.yourCashNumber)}</td>
-            <td>${escapeHTML(entry.whatsapp)}</td>
-            <td>${escapeHTML(entry.time)}</td>
-            <td><img src="${entry.screenshot}" alt="صورة التحويل" /></td>
-          </tr>
-        `;
-      });
+ let n=Number(document.getElementById("spyCount").value);
+ if(players.length<4){alert("اكتب أسماء 4 لاعبين على الأقل.");return}
+ if(n>=players.length){alert("عدد الجواسيس كبير جدًا.");return}
+ seconds=Number(document.getElementById("seconds").value);
+ beginRound();
+}
+function beginRound(){
+ const cat=document.getElementById("category").value;
+ const pool=cat==="all"?Object.values(words).flat():words[cat];
+ word=pool[Math.floor(Math.random()*pool.length)];
+ spies=shuffle(players).slice(0,Number(document.getElementById("spyCount").value));
+ questionOrder=shuffle(players);
+ susOrder=shuffle(players);
+ voteOrder=shuffle(players);
+ qi=si=vi=0;
+ suspicions={};votes={};
+ show("pass");
+ document.getElementById("passTitle").textContent="سلّم الموبايل إلى";
+ document.getElementById("passName").textContent=players[0];
+ document.getElementById("passHint").textContent="لا تجعل أحدًا يرى شاشتك!";
+}
+function openRole(){
+ let p=document.getElementById("passName").textContent;
+ let spy=spies.includes(p);
+ document.getElementById("roleTitle").textContent=
+ spy?"🕵️ أنت الجاسوس!":"✅ أنت لاعب عادي";
+ document.getElementById("roleWord").textContent=spy?"الكلمة سرية 🤫":word;
+ document.getElementById("roleHint").textContent=spy?
+ "حاول معرفة الكلمة من الأسئلة، ولا تكشف نفسك!":
+ "احفظ الكلمة، واسأل الآخرين أسئلة تساعدك على اكتشاف الجاسوس.";
+ show("role");
+}
+function roleDone(){
+ let p=document.getElementById("passName").textContent;
+ let idx=players.indexOf(p)+1;
+ if(idx<players.length){
+  document.getElementById("passName").textContent=players[idx];
+  show("pass");
+ }else{
+  qi=0;showQuestion();
+ }
+}
+function runTimer(id,bar,onEnd){
+ stopTimer();
+ let left=seconds;
+ document.getElementById(id).textContent=left+" ثانية";
+ document.getElementById(bar).style.width="100%";
+ timer=setInterval(()=>{
+  left--;
+  document.getElementById(id).textContent=left+" ثانية";
+  document.getElementById(bar).style.width=
+   Math.max(0,left/seconds*100)+"%";
+  if(left<=0){stopTimer();onEnd()}
+ },1000);
+}
+function showQuestion(){
+ if(qi>=questionOrder.length){startSuspicion();return}
+ show("questions");
+ let p=questionOrder[qi];
+ let target=questionOrder[(qi+1)%questionOrder.length];
+ document.getElementById("asker").textContent=p;
+ document.getElementById("target").textContent=target;
+ runTimer("timer1","bar1",nextQuestion);
+}
+function nextQuestion(){qi++;showQuestion()}
+function skipToSuspicion(){startSuspicion()}
+function startSuspicion(){
+ si=0;showSuspicion();
+}
+function fillSelect(id,exclude){
+ let el=document.getElementById(id);el.replaceChildren();
+ players.filter(p=>p!==exclude).forEach(p=>{
+  let o=document.createElement("option");
+  o.value=p;o.textContent=p;el.appendChild(o);
+ });
+}
+function showSuspicion(){
+ if(si>=susOrder.length){startVoting();return}
+ show("suspicion");
+ let p=susOrder[si];
+ document.getElementById("susPlayer").textContent=p;
+ fillSelect("susChoice",p);
+ runTimer("timer2","bar2",saveSuspicion);
+}
+function saveSuspicion(){
+ if(si>=susOrder.length)return;
+ stopTimer();
+ let p=susOrder[si];
+ suspicions[p]=document.getElementById("susChoice").value;
+ si++;showSuspicion();
+}
+function skipToVoting(){startVoting()}
+function startVoting(){
+ vi=0;showVote();
+}
+function showVote(){
+ if(vi>=voteOrder.length){showResults();return}
+ show("vote");
+ let p=voteOrder[vi];
+ document.getElementById("voter").textContent=p;
+ fillSelect("voteChoice",p);
+ runTimer("timer3","bar3",submitVote);
+}
+function submitVote(){
+ if(vi>=voteOrder.length)return;
+ stopTimer();
+ let p=voteOrder[vi];
+ votes[p]=document.getElementById("voteChoice").value;
+ vi++;showVote();
+}
+function showResults(){
+ show("results");
+ let counts={};
+ players.forEach(p=>counts[p]=0);
+ Object.values(votes).forEach(p=>counts[p]++);
+ let sorted=shuffle(players).sort((a,b)=>counts[b]-counts[a]);
+ document.getElementById("resultText").textContent=
+ "عدد المصوتين: "+Object.keys(votes).length+" من "+players.length;
+ let list=document.getElementById("resultsList");
+ list.replaceChildren();
+ sorted.forEach(p=>{
+  let d=document.createElement("div");
+  d.className="item";
+  d.textContent=p+" — "+counts[p]+" صوت";
+  list.appendChild(d);
+ });
+ document.getElementById("spyReveal").classList.add("hide");
+ document.getElementById("spyReveal").replaceChildren();
+}
+function showSpies(){
+ let el=document.getElementById("spyReveal");
+ el.classList.remove("hide");
+ el.replaceChildren();
+ let title=document.createElement("h3");
+ title.textContent="🕵️ الجاسوس الحقيقي";
+ el.appendChild(title);
+ let s=document.createElement("div");
+ s.className="big";s.textContent=spies.join(" و ");
+ el.appendChild(s);
+ let w=document.createElement("p");
+ w.textContent="الكلمة السرية كانت: "+word;
+ el.appendChild(w);
 
-      table += '</tbody></table>';
-      entriesContainer.innerHTML = table;
-    }
-
-    // تنظيف نصوص HTML لحماية من حقن أكواد
-    function escapeHTML(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    // مسح جميع المشتركين
-    clearBtn.addEventListener('click', () => {
-      if (confirm('هل أنت متأكد أنك تريد مسح جميع المشتركين؟ هذا الإجراء لا يمكن التراجع عنه.')) {
-        localStorage.removeItem('entries');
-        renderEntries();
-      }
-    });
-  </script>
+ let title2=document.createElement("h3");
+ title2.textContent="🧐 اختيارات الشك";
+ el.appendChild(title2);
+ players.forEach(p=>{
+  let d=document.createElement("div");
+  d.className="item";
+  d.textContent=p+" شك في "+(suspicions[p]||"لم يختر أحدًا");
+  el.appendChild(d);
+ });
+}
+function newRound(){beginRound()}
+</script>
 </body>
 </html>
